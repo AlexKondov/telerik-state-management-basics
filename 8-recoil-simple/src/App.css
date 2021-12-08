@@ -1,0 +1,44 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: #282c34;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.App form {
+  display: flex;
+  flex-direction: column;
+}
+
+.App input {
+  padding: 10px 5px;
+  width: 300px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 5px;
+}
+
+.App button {
+  padding: 8px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #0ebfe9;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.App label {
+  display: block;
+  color: #f9f9f9;
+  margin-bottom: 5px;
+}
+
+.App p {
+  font-size: 12px;
+  color: #f9f9f9;
+  margin: 0;
+}

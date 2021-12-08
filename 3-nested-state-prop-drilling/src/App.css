@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  background-color: #282c34;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.App * {
+  color: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  padding: 50px;
+  margin: 50px;
+}

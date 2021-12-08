@@ -1,0 +1,10 @@
+.App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  background-color: #282c34;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  color: #f9f9f9;
+}

@@ -1,0 +1,32 @@
+.App {
+  display: flex;
+  background-color: #282c34;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.App * {
+  color: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  padding: 40px;
+  margin: 40px;
+}
+
+.App form {
+  display: flex;
+  flex-direction: row;
+}
+
+.App input {
+  padding: 5px;
+  color: #000;
+  margin: 2px;
+}
+
+.App button {
+  padding: 10px 5px;
+  margin: 2px;
+  color: #000;
+  width: 100%;
+}
