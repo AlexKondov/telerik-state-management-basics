@@ -4,12 +4,9 @@ import {
   atom,
   selector,
   useSetRecoilState,
-  useRecoilState,
   useRecoilValue,
-  selectorFamily,
 } from "recoil";
 import { Suspense } from "react";
-// import { useEffect } from "react";
 
 const pokemonListQuery = selector({
   key: "PokemonListQuery",
@@ -31,9 +28,11 @@ const currentPokemonIDState = atom({
   default: 1,
 });
 
-const pokemonInfoQuery = selectorFamily({
+const pokemonInfoQuery = selector({
   key: "PokemonInfoQuery",
-  get: (pokemonID) => async () => {
+  get: async ({ get }) => {
+    const pokemonID = get(currentPokemonIDState);
+
     const response = await (
       await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`)
     ).json();
@@ -44,11 +43,6 @@ const pokemonInfoQuery = selectorFamily({
 
     return response;
   },
-});
-
-const currentPokemonInfoQuery = selector({
-  key: "CurrentPokemonInfo",
-  get: ({ get }) => get(pokemonInfoQuery(get(currentPokemonIDState))),
 });
 
 export default function App() {
@@ -67,8 +61,8 @@ export default function App() {
 }
 
 function PokemonInfo() {
-  const currentPokemonInfo = useRecoilValue(currentPokemonInfoQuery);
-  console.log(currentPokemonInfo);
+  const currentPokemonInfo = useRecoilValue(pokemonInfoQuery);
+
   return (
     <div>
       <h3>{capitalizeFirstLetter(currentPokemonInfo.name)} Details</h3>
