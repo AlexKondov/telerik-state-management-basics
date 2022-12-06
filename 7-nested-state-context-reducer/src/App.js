@@ -15,7 +15,7 @@ function reducer(state, action) {
       return { ...state, name: action.name };
     case "update-lastName":
       return { ...state, lastName: action.lastName };
-    case "address":
+    case "update-address":
       return { ...state, address: action.address };
     default:
       return state;
