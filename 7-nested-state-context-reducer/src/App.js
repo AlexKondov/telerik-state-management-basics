@@ -1,3 +1,4 @@
+import { useContext, useReducer, createContext } from "react";
 import "./App.css";
 
 const initialState = {
@@ -24,35 +25,15 @@ function reducer(state, action) {
 
 const UserContext = createContext({ name: "" });
 
-const UserProvider = function ({ children }) {
+export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <UserContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
-function useUserContext() {
-  const { state, dispatch } = useContext(UserContext);
-
-  return {
-    user: state,
-    setUserName: (name) => dispatch({ type: "update-name", name }),
-    setUserLastName: (lastName) =>
-      dispatch({ type: "update-lastName", lastName }),
-    setUserAddress: (address) => dispatch({ type: "update-address", address }),
-  };
-}
-
-export default function App() {
-  return (
-    <UserProvider>
       <div className="App">
         <Dashboard />
       </div>
-    </UserProvider>
+    </UserContext.Provider>
   );
 }
 
@@ -81,11 +62,14 @@ function DashboardContent() {
 }
 
 function UserForm() {
-  const { setUserName } = useUserContext();
+  const { dispatch } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserName(e.target[0].value);
+    dispatch({
+      type: "update-name",
+      name: e.target[0].value,
+    });
   };
 
   return (
@@ -97,6 +81,6 @@ function UserForm() {
 }
 
 function WelcomeMessage() {
-  const { user } = useUserContext();
-  return <h1>Welcome, {user.name}!</h1>;
+  const { state } = useContext(UserContext);
+  return <h1>Welcome, {state.name}!</h1>;
 }

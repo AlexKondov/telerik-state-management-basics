@@ -3,28 +3,14 @@ import "./App.css";
 
 const UserContext = createContext({ name: "" });
 
-const UserProvider = function ({ children }) {
-  const [user, setUser] = useState({ name: "John" });
-
+export default function App() {
+  const [user, setUser] = useState({ name: "Alex" });
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
-function useUserContext() {
-  const { user, setUser } = useContext(UserContext);
-  return { user, setUserName: (name) => setUser({ name }) };
-}
-
-export default function App() {
-  return (
-    <UserProvider>
       <div className="App">
         <Dashboard />
       </div>
-    </UserProvider>
+    </UserContext.Provider>
   );
 }
 
@@ -53,22 +39,20 @@ function DashboardContent() {
 }
 
 function UserForm() {
-  const { setUserName } = useUserContext();
+  const { user, setUser } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUserName(e.target[0].value);
+  const handleChange = (e) => {
+    setUser({ name: e.target.value });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="User Name" />
-      <button>Update</button>
-    </form>
+    <div>
+      <input name="User Name" value={user.name} onChange={handleChange} />
+    </div>
   );
 }
 
 function WelcomeMessage() {
-  const { user } = useUserContext();
+  const { user } = useContext(UserContext);
   return <h1>Welcome, {user.name}!</h1>;
 }

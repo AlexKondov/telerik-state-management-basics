@@ -4,9 +4,11 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      <Input />
-      <HintMessage />
-      <Button />
+      <div>
+        <Input />
+        <HintMessage />
+        <Button />
+      </div>
     </div>
   );
 }
